@@ -1,8 +1,6 @@
 How to Detect and Display Unique Speakers
 --
 
-## Description
-
 This is an example of how you can use AssemblyAI's [Speaker Labels](https://www.assemblyai.com/docs/core-transcription#speaker-labels-speaker-diarization) model to automatically detect unique speakers and display a turn-by-turn dialogue of the conversation. 
 
 ## Quick Setup
