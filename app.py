@@ -15,8 +15,7 @@ utterances_df['start_str'] = utterances_df['start'].apply(convertMillis)
 uploaded = False
 
 ## body
-st.title('Speaker Diarization')
-st.subheader('Answer the question "who spoke when" with AssemblyAI')
+st.title('Speaker Diarization Demo')
 
 uploaded_file = st.file_uploader('Upload a local file for speaker diarization.')
 
@@ -32,24 +31,22 @@ if uploaded_file is not None:
 
         # display speaker label data when transcription is completed
         if status == 'completed':
-            st.subheader('Turn-By-Turn Conversation Recap')
+            st.subheader('Turn-by-Turn Conversation Recap')
             utterances = polling_response.json()['utterances']
             utterances_df = pd.DataFrame(utterances)
             utterances_df['start_str'] = utterances_df['start'].apply(convertMillis)
 
             for index, row in utterances_df.iterrows():
-                st.button(row['start_str'], key=index, disabled=True, args=(row['start'],))
-                st.markdown(f'<h3>Speaker {row["speaker"]}</h3>', unsafe_allow_html=True)
-                st.write(row['text'])
+                st.markdown(f'#### Speaker {row["speaker"]} - __{row["start_str"]}__')
+                st.markdown(f'{row["text"]}')
 
 # displays data from static json file when page first loads
 if uploaded == False:
     st.video('https://youtu.be/Da3SBwlgcDc')
 
-    st.subheader('Turn-By-Turn Conversation Recap')
+    st.title('Turn-by-Turn Conversation Recap')
 
     # display speaker label data
     for index, row in utterances_df.iterrows():
-        st.button(row['start_str'], key=index, disabled=True, args=(row['start'],))
-        st.markdown(f'<h3>Speaker {row["speaker"]}</h3>', unsafe_allow_html=True)
-        st.write(row['text'])
+        st.markdown(f'#### Speaker {row["speaker"]} - __{row["start_str"]}__')
+        st.markdown(f'{row["text"]}')
